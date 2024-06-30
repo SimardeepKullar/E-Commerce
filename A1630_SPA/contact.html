@@ -1,0 +1,35 @@
+<style>
+    #map{
+        height: 300px;
+        width: 300px;
+    }    
+</style>
+<section class="mapSection">
+    <h2>Locate Us</h2>
+    <p>
+        <strong>Email: </strong>info@smartcustomer.com<br>
+        <strong>Phone: </strong>(905) 123-4567<br>
+        <strong>Address: </strong>245 Church St, Toronto, ON M5B 1Z4<br>
+    </p>
+    <div id="map"></div><br>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz9KF31zzZOrPY1L8U1MUIReadDdoL1Js&callback=initMap"></script>
+    <script>
+        function initMap() {
+            var location = {lat: 43.65769947445758, lng: -79.3774407115834 };   // ENG Building
+            var map = new google.maps.Map(document.getElementById("map"), {zoom: 16, center: location});              
+            var marker = new google.maps.Marker({position: location, map: map});  
+            var infoWindow = new google.maps.InfoWindow({content: "<h4>ENG Building Coordinates:</h4><br>" + "<h5>" + (Math.round(location.lat * 100) / 100).toFixed(2) + ", " + (Math.round(location.lng * 100) / 100).toFixed(2) + "</h5>"});
+                            marker.addListener("click", function()
+                                {infoWindow.open(map, marker); })
+        }
+    </script>
+</section>
+
+<section class="mapSection">
+    <h2>Service Desk</h2>
+    <p>
+        <strong>Email: </strong>service@smartcustomer.com<br>
+        <strong>Phone: </strong>(905) 765-4321<br>
+    </p>
+    <img src="https://t4.ftcdn.net/jpg/01/58/21/69/360_F_158216984_zSFxdd273rSrPmwnsK1mwukR5c2N0zWq.jpg" style="width:300px; height:300px">
+</section>

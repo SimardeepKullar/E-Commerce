@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <link rel="icon" href="images/favicon.png">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <title>Home Page</title>
+    </head>
+    <body>
+        <header>
+            <div style="align-items: center; display: flex; margin: 0 30px;">
+                <img src="images/sneakerStudio2.png" style="width:300px; height:auto;">
+            </div>
+        </header>
+        
+        <nav>
+            <ul style="align-items: center; justify-content: center;">
+                <li><a href="#/!">Home</a></li>
+                <li><a href="#!aboutus">About Us</a></li>
+                <li><a href="#!contact">Contact</a></li>
+                <li><a href="#!inventory">Shopping Cart</a></li>
+                <li><a href="http://localhost/phpFiles630/A1630_SPA/form_payee.php">Pay Bill</a></li>
+                <li><a href="#!typeServices">Types of Services</a></li>
+                <li><a href="#!reviews">Reviews</a></li>
+                <li class="dropdown">
+                    <a href="#">Sign In &#9662;</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#!login">Member Login</a></li>
+                        <li><a href="http://localhost/phpFiles630/A1630_SPA/adminLogin.php">Admin Login</a></li>
+                    </ul>
+                </li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li class="dropdown">
+                    <a href="#"><img src="images/db.png" alt=""></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="insert.php">Insert</a></li>
+                      <li><a href="delete.php">Delete</a></li>
+                      <li><a href="select.php">Select</a></li>
+                      <li><a href="update.php">Update</a></li>
+                    </ul>
+                </li>
+                <li><a href="search.php"><img src="images/search.png" alt=""></a></li>  
+            </ul>
+        </nav>
+
+        <script>
+            var app = angular.module("myApp", ["ngRoute"]);
+            app.config(function($routeProvider) {
+                $routeProvider
+                .when("/", {
+                    templateUrl : "home.html"
+                })
+                .when("/aboutus", {
+                    templateUrl : "aboutus.html"
+                })
+                .when("/contact", {
+                    templateUrl : "contact.html"
+                })
+                .when("/typeServices", {
+                    templateUrl : "typeServices.html"
+                })
+                .when("/reviews", {
+                    templateUrl : "reviews.php",
+                    controller : "formcontroller"
+                })
+                .when("/login", {
+                    templateUrl : "login.php"
+                })
+                .when("/adminLogin", {
+                    templateUrl : "adminLogin.php"
+                })
+                .when("/signup", {
+                    templateUrl : "signup.php"
+                })
+                .when("/inventory", {
+                    templateUrl : "inventory.php"
+                })
+                .when("/checkout", {
+                    templateUrl : "checkingout.php"
+                });
+                
+            });
+            app.controller("loginController", function($scope, $http) {
+                $scope.login = function() {
+                    if ($scope.username == null) {
+                        alert("Please input Username");
+                    } 
+                    else if ($scope.password == null) {
+                        alert("Please input Password");
+                    } else {
+                        $scope.alert = "Checking Account. Please Wait...";
+                        $http({
+                            method: 'POST',
+                            url: 'loginCheck.php',
+                            data:{username:$scope.username, password:$scope.password}
+                        }).then(function (data){
+                            console.log(data)
+                            if(data.error){
+                                $scope.error = true;
+                                $scope.success = false;
+                                $scope.message = data.data.message;
+                                // setTimeout(function() {
+                                //     $scope.$apply();
+                                // }, 3000);
+                            }
+                            else{
+                                $scope.success = true;
+                                $scope.error = false;
+                                $scope.message = data.data.message;
+                                setTimeout(function() {
+                                    $scope.username = null;
+                                    $scope.password = null;
+                                    $scope.$apply();
+                                }, 1000);
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 500);
+                            }
+                            
+                        },function (error){
+                            console.log(error, 'can not get data.');
+                        });
+                    }
+                }
+            });
+            
+            app.controller("formcontroller", function($scope, $http, $route) {
+                $http.get('reviews-table.php').then(function(response) {
+                    $scope.reviews = response.data;
+                }, function(error) {
+                    console.log(error);
+                });
+            
+                $scope.reviews = [];
+                $scope.displayData = function() {
+                    $http.get('reviews-table.php').then(function(response) {
+                        $scope.reviews = response.data;
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                }
+                $scope.insert = {};
+                $scope.insertData = function() {
+                    $http({
+                        method: 'POST',
+                        url: 'review-insert.php', 
+                        headers : { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        data: $scope.insert,
+                    }).then(function (data){
+                        console.log(data);
+                        if(data.data.error)
+                        {
+                            $scope.successInsert = null;
+                        }
+                        else
+                        {
+                            $scope.successInsert = data.data.message;
+                            $scope.displayData();
+                            // reset the data values using $scope 
+                            $scope.insert.ServiceRating = null;
+                            $scope.insert.product = null;
+                            $scope.insert.rating = null;
+                            $scope.insert.review = null;
+
+                        } 
+                    }, function (error) {
+                        console.log(error, 'can not post data.');
+                    });
+                }
+            });
+        </script>
+        
+        <main ng-view></main>
+    </body>
+    <footer>
+        <p>&copy; 2023 Smart Customer Service. All rights reserved.</p>
+        <p id="browser"></p>
+        <script>
+            var userAgent = navigator.userAgent;
+        
+            if (userAgent.match(/chrome/i)){
+                document.getElementById("browser").innerHTML = "Browser: Google Chrome";
+            } else if (userAgent.match(/Firefox/i)){
+                document.getElementById("browser").innerHTML = "Browser: Firefox";
+            } else if (userAgent.match(/Trident|EI|Internet Explorer/i)){
+                document.getElementById("browser").innerHTML = "Browser: Internet Explorer";
+            } else {
+                document.getElementById("browser").innerHTML = "Browser: Unknown";
+            }
+        </script>
+    </footer>
+</html>
