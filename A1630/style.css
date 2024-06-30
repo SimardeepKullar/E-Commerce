@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Manrope', sans-serif;
+    margin: auto;
+    padding: 0;
+    /* max-width: 1200px !important; */
+}
+
+header {
+    background-color: #fff;
+    color: black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+nav {
+    background-color: #fff;
+    color: #000;
+    font-size: 14px;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+nav li {
+    margin: 0 5px;
+}
+nav li a {
+    display: block;
+    color: #000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav li a:hover {
+    background-color: #ededed;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-menu li a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+.dropdown-menu li a:hover {
+    background-color: #f1f1f1;
+}
+
+* {
+    transition: 0.4s;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+section {
+    padding: 20px;
+}
+
+.hero-btn {
+    padding: 16px 32px;
+    border: 2px solid #fff;
+    border-radius: 16px;
+    background-color: #00000020;
+}
+
+.hero-btn:hover {
+    background-color: #00000060;
+    cursor: pointer;
+}
+
+.hero-btn a { text-decoration: none; color: white;}
+
+
+.aboutSection {
+    width: 350px;
+}
+
+.homeSection {
+    width: 100%;
+}
+
+.loginSection {
+    border: 1px solid white;
+}
+
+.checkOutSection {
+    width: 25%;
+}
+
+.processSection {
+    width: 30%;
+}
+
+.outputSection {
+    width:45%
+}
+
+.mapSection {
+    border: 1px solid white;
+    width: 350px;
+}
+
+.mapSection1 {
+    width: 45%;
+    height: auto;
+}
+
+.mapSection2 {
+    width: 40%;
+    height: auto;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    margin: 0;
+    margin-top: 10px
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+table {
+    border-collapse: collapse;
+    overflow: auto;
+}
+
+#review-table {
+    width: 100%
+}
+
+#Reviews-title { margin-bottom: 30px;}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+button {
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 5px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 5px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+button:hover {
+  background-color: #2c974b;
+}
+
+button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+button:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+button:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    margin: 25px auto;
+}
+.store{
+    margin: 0px 0px;
+    width: 89%
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.review {
+    margin-bottom: 40px;
+    width:70%;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+.review .review-text {
+    margin-bottom: 10px;
+}
+
+.review .review-text p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.review .review-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review .review-details .name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.review .review-details .date {
+    font-size: 14px;
+    color: #888;
+}
+
+
+/** Internet Explorer */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    html {
+    background-color: blue;
+    }
+}
+/* Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+    
+}
+
+/** Mozilla Firefox */
+@-moz-document url-prefix() {
+    html {
+        background-color: orange;
+        }
+    h1 {
+        color: red;
+    }
+}
+
+/* Safari 11+ */
+@supports (-webkit-appearance:none) and (stroke-color:transparent) {
+    
+}
